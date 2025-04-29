@@ -297,27 +297,27 @@ class InputService : AccessibilityService() {
             duration = 1
         }
         try {
-            if (stroke == null) {
-                // TODO: Fix for Android 7
+            // TODO: Fix for Android 7
+            if (Build.VERSION.SDK_INT >= 26) {
+                if (stroke == null) {
+                    stroke = GestureDescription.StrokeDescription(
+                        touchPath,
+                        0,
+                        duration,
+                        willContinue
+                    )
 
-                /**
-                stroke = GestureDescription.StrokeDescription(
-                    touchPath,
-                    0,
-                    duration,
-                    willContinue
-                )
-                */
-
+                } else {
+                    stroke = stroke?.continueStroke(touchPath, 0, duration, willContinue)
+                }
+            } else {
                 stroke = GestureDescription.StrokeDescription(
                     touchPath,
                     0,
                     duration
                 )
-
-            } else {
-                stroke = stroke?.continueStroke(touchPath, 0, duration, willContinue)
             }
+
             stroke?.let {
                 val builder = GestureDescription.Builder()
                 builder.addStroke(it)
