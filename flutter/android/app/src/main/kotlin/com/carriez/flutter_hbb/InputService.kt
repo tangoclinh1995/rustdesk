@@ -180,11 +180,13 @@ class InputService : AccessibilityService() {
             val path = Path()
             path.moveTo(mouseX.toFloat(), mouseY.toFloat())
             path.lineTo(mouseX.toFloat(), (mouseY - WHEEL_STEP).toFloat())
+
             val stroke = GestureDescription.StrokeDescription(
                 path,
                 0,
                 WHEEL_DURATION
             )
+
             val builder = GestureDescription.Builder()
             builder.addStroke(stroke)
             wheelActionsQueue.offer(builder.build())
@@ -199,11 +201,13 @@ class InputService : AccessibilityService() {
             val path = Path()
             path.moveTo(mouseX.toFloat(), mouseY.toFloat())
             path.lineTo(mouseX.toFloat(), (mouseY + WHEEL_STEP).toFloat())
+
             val stroke = GestureDescription.StrokeDescription(
                 path,
                 0,
                 WHEEL_DURATION
             )
+
             val builder = GestureDescription.Builder()
             builder.addStroke(stroke)
             wheelActionsQueue.offer(builder.build())
@@ -294,6 +298,7 @@ class InputService : AccessibilityService() {
         }
         try {
             if (stroke == null) {
+                // TODO: Fix for Android 7
                 stroke = GestureDescription.StrokeDescription(
                     touchPath,
                     0,
