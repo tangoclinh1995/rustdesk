@@ -299,12 +299,22 @@ class InputService : AccessibilityService() {
         try {
             if (stroke == null) {
                 // TODO: Fix for Android 7
+
+                /**
                 stroke = GestureDescription.StrokeDescription(
                     touchPath,
                     0,
                     duration,
                     willContinue
                 )
+                */
+
+                stroke = GestureDescription.StrokeDescription(
+                    touchPath,
+                    0,
+                    duration
+                )
+
             } else {
                 stroke = stroke?.continueStroke(touchPath, 0, duration, willContinue)
             }
