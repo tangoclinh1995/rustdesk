@@ -1,0 +1,16 @@
+name: Flutter Tag Build Android only
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'android-v[0-9]+.[0-9]+.[0-9]+'
+      - 'android-v[0-9]+.[0-9]+.[0-9]+-[0-9]+'
+
+jobs:
+  run-flutter-tag-build:
+    uses: ./.github/workflows/flutter-build-android-only.yml
+    secrets: inherit
+    with:
+      upload-artifact: true
+      upload-tag: ${{ github.ref_name }}
