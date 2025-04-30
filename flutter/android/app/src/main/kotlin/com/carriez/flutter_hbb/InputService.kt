@@ -297,7 +297,11 @@ class InputService : AccessibilityService() {
             duration = 1
         }
         try {
-            // TODO: Fix for Android 7
+            // NOTE:
+            // Test on emulators and real devices
+            // Found that any methods of GestureDescription.StrokeDescription class
+            // which requires `willContinue` parameter does not work on Android SDK 24, 25
+            // Therefore, it is necessary to check the SDK version here
             if (Build.VERSION.SDK_INT >= 26) {
                 if (stroke == null) {
                     stroke = GestureDescription.StrokeDescription(
