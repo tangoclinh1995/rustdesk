@@ -282,6 +282,8 @@ class InputService : AccessibilityService() {
     }
 
     private fun startGesture(x: Int, y: Int) {
+        Log.d(logTag, "startGesture x:$x y:$y")
+
         touchPath.reset()
         touchPath.moveTo(x.toFloat(), y.toFloat())
         lastTouchGestureStartTime = System.currentTimeMillis()
@@ -335,6 +337,8 @@ class InputService : AccessibilityService() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun continueGesture(x: Int, y: Int) {
+        Log.d(logTag, "continueGesture x:$x y:$y")
+
         touchPath.lineTo(x.toFloat(), y.toFloat())
 
         // doDispatchGesture(x, y, true)
@@ -347,6 +351,8 @@ class InputService : AccessibilityService() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun endGesture(x: Int, y: Int) {
+        Log.d(logTag, "endGesture x:$x y:$y")
+
         doDispatchGesture(x, y, false)
         touchPath.reset()
         stroke = null
