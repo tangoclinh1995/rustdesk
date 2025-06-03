@@ -335,12 +335,14 @@ class InputService : AccessibilityService() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun continueGesture(x: Int, y: Int) {
-        doDispatchGesture(x, y, true)
-        touchPath.reset()
-        touchPath.moveTo(x.toFloat(), y.toFloat())
-        lastTouchGestureStartTime = System.currentTimeMillis()
-        lastX = x
-        lastY = y
+        touchPath.lineTo(x.toFloat(), y.toFloat())
+
+        // doDispatchGesture(x, y, true)
+        // touchPath.reset()
+        // touchPath.moveTo(x.toFloat(), y.toFloat())
+        // lastTouchGestureStartTime = System.currentTimeMillis()
+        // lastX = x
+        // lastY = y
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
