@@ -341,12 +341,18 @@ class InputService : AccessibilityService() {
 
         touchPath.lineTo(x.toFloat(), y.toFloat())
 
-        // doDispatchGesture(x, y, true)
-        // touchPath.reset()
-        // touchPath.moveTo(x.toFloat(), y.toFloat())
-        // lastTouchGestureStartTime = System.currentTimeMillis()
-        // lastX = x
-        // lastY = y
+        // NOTE:
+        // For Android 24, 25, willContinue is not supported, even in OS level
+        // Therefore, this if statement is added to avoid issue that dragging
+        // gesture becomes a click gesture in those Android versions
+        if (Build.VERSION.SDK_INT >= 26) {
+            doDispatchGesture(x, y, true)
+            touchPath.reset()
+            touchPath.moveTo(x.toFloat(), y.toFloat())
+            lastTouchGestureStartTime = System.currentTimeMillis()
+            lastX = x
+            lastY = y
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
