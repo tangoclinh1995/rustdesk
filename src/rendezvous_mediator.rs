@@ -389,14 +389,17 @@ impl RendezvousMediator {
         } else {
             false
         };
-        if (cfg!(debug_assertions) && option_env!("TEST_TCP").is_some())
-            || is_http_proxy
-            || get_builtin_option(config::keys::OPTION_DISABLE_UDP) == "Y"
-        {
-            Self::start_tcp(server, host).await
-        } else {
-            Self::start_udp(server, host).await
-        }
+
+        Self::start_tcp(server, host).await
+
+        // if (cfg!(debug_assertions) && option_env!("TEST_TCP").is_some())
+        //     || is_http_proxy
+        //     || get_builtin_option(config::keys::OPTION_DISABLE_UDP) == "Y"
+        // {
+        //     Self::start_tcp(server, host).await
+        // } else {
+        //     Self::start_udp(server, host).await
+        // }
     }
 
     async fn handle_request_relay(&self, rr: RequestRelay, server: ServerPtr) -> ResultType<()> {
